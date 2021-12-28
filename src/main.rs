@@ -21,7 +21,7 @@ fn index() -> &'static str {
 fn rocket() -> _ {
     let port = std::env::var("PORT").unwrap_or("8000".to_string());
     let port_as_int = port.parse::<u16>().unwrap();
-    let figmant = rocket::Config::figment().merge(("port", port_as_int));
+    let figmant = rocket::Config::figment().merge(("port", port_as_int)).merge(("address", "0.0.0.0"));
 
     rocket::custom(figmant).mount("/", routes![index])
 }
